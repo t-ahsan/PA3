@@ -4,33 +4,43 @@
 #include "math.h"
 using namespace std;
 
-Person::Person(){
+Person::Person():Game_Object('P'){
 	speed = 5;
 	cout << "Person default constructed" << endl;
 }
 
-Person::Person(char in_code){
+Person::Person(char in_code):Game_Object(in_code){
 	speed = 5;
+	health = 5;
 	state = 's';
-	display_code = in_code;
 	cout << "Person constructed" << endl;
 }
 
 Person::Person(Cart_Point in_loc, int in_id, char in_code):Game_Object(in_loc, in_id, in_code){
 	speed = 5;
+	health = 5;
+	state = 's';
 	cout << "Person constructed" << endl;
 }
 
 void Person::start_moving(Cart_Point dest){
-	setup_destination(dest);
-	state = 'm';
-	cout << "Moving " << id_num << " to " << dest << endl;
-	cout << display_code << id_num << ": On my way!" << endl;
+	if (state == 'x')
+		cout << "Sorry I cannot do that for I am dead" << endl;
+	else{
+		this ->setup_destination(dest);
+		state = 'm';
+		cout << "Moving " << id_num << " to " << dest << endl;
+		cout << display_code << id_num << ": On my way!" << endl;
+	}
 }
 
 void Person::stop(){
-	state = 's';
-	cout << "Stopping " << display_code << id_num << endl;
+	if (state == 'x')
+		cout << "Sorry I cannot do that for I am dead" << endl;
+	else{
+		state = 's';
+		cout << "Stopping " << display_code << id_num << endl;
+	}
 }
 
 void Person::show_status(){
@@ -48,7 +58,7 @@ bool Person::update_location(){
 	else{
 		location.x = location.x + delta.x;
 		location.y = location.y + delta.y;
-		cout << display_code << id_num << ": moved" << endl;
+		cout << display_code << id_num << ": moved to " << location << endl;
 		return false;
 	}
 }
@@ -57,6 +67,21 @@ void Person::setup_destination(Cart_Point dest){
 	destination = dest;
 	delta.x = (destination.x-location.x)*(speed/cart_distance(destination, location));
 	delta.y = (destination.y-location.y)*(speed/cart_distance(destination, location));
+}
+
+bool Person::is_alive(){
+	if (state != 'x')
+		return true;
+	else return false;
+}
+
+void Person::take_hit(int attack_strength){
+	health -= attack_strength;
+	if (health <= 0){
+		cout << "Alas, I have died!" << endl;
+		state = 'x';
+	}
+	else cout << "Ouch!" << endl;
 }
 
 void Person::start_supplying(Oxygen_Depot* inputDepot){

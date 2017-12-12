@@ -3,10 +3,9 @@
 #include "Space_Station.h"
 using namespace std;
 
-Space_Station::Space_Station(){
+Space_Station::Space_Station():Game_Object('s'){
 	upgrade_count = 0;
 	amount_moonstones = 0;
-	display_code = 's';
 	state = 'o';
 	number_astronauts = 0;
 	Cart_Point p1 (0,0);
@@ -15,10 +14,8 @@ Space_Station::Space_Station(){
 	cout << "Space_Station default constructed" << endl;
 }
 
-Space_Station::Space_Station(Cart_Point inputLoc, int inputId){
+Space_Station::Space_Station(Cart_Point inputLoc, int inputId):Game_Object(inputLoc, inputId, 's'){
 	upgrade_count = 0;
-	id_num = inputId;
-	location = inputLoc;
 	amount_moonstones = 0;
 	display_code = 's';
 	state = 'o';

@@ -3,21 +3,18 @@
 #include "Oxygen_Depot.h"
 using namespace std;
 
-Oxygen_Depot::Oxygen_Depot(){
+Oxygen_Depot::Oxygen_Depot():Game_Object('O'){
 	amount_oxygen = 50;
 	update_count = 0;
-	display_code = 'O';
 	state = 'f';
 	cout << "Oxygen_Depot default constructed" << endl;
 }
 
-Oxygen_Depot::Oxygen_Depot(Cart_Point inputLoc, int inputId){
+Oxygen_Depot::Oxygen_Depot(Cart_Point inputLoc, int inputId):Game_Object(inputLoc, inputId, 'O'){
 	amount_oxygen = 50;
 	update_count = 0;
-	display_code = 'O';
 	state = 'f';
-	id_num = inputId;
-	location = inputLoc;
+	cout << "Oxygen_Depot constructed" << endl;
 }
 
 bool Oxygen_Depot::is_empty(){

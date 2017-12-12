@@ -15,13 +15,13 @@ protected:
 
 public:	
 
-	Game_Object();
 	Game_Object(char in_code);
 	Game_Object(Cart_Point in_loc, int in_id, char in_code);
 	Cart_Point get_location();	
 	int get_id();
 	char get_state();
 	void drawself(char* ptr);
+	virtual bool is_alive();
 	virtual void show_status();
 	virtual bool update() = 0;
 	virtual ~Game_Object();

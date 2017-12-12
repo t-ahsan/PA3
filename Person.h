@@ -19,6 +19,8 @@ public:
 	void start_moving(Cart_Point dest);
 	void stop();
 	void show_status();
+	bool is_alive();
+	void take_hit(int attack_strength);
 	friend class Astronaut;
 	virtual void start_supplying(Oxygen_Depot* inputDepot);
 	virtual void start_depositing(Space_Station* inputStation);
@@ -30,6 +32,7 @@ protected:
 
 	bool update_location();
 	void setup_destination(Cart_Point dest);
+	int health;
 
 private:
 

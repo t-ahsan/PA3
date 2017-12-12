@@ -2,9 +2,6 @@
 #include "Cart_Point.h"
 #include <iostream>
 
-Game_Object::Game_Object(){
-
-}
 
 Game_Object::Game_Object(char in_code){
 	display_code = in_code;
@@ -36,8 +33,8 @@ char Game_Object::get_state(){
 void Game_Object::drawself(char* ptr){
 	if ((*ptr == '.') || (*ptr ==' '))
     {
-        *ptr = display_code;
-        *(ptr+1) = get_id() + 48;
+        *ptr = this->display_code;
+        *(ptr+1) = this ->get_id() + 48;
     }
     else
     {
@@ -45,6 +42,10 @@ void Game_Object::drawself(char* ptr){
         *(ptr+1) = ' ';
     }
 } 
+
+bool Game_Object::is_alive(){
+	return true;
+}
 
 void Game_Object::show_status(){
 	cout << display_code << id_num << " at " << location;

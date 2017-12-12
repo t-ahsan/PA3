@@ -11,6 +11,8 @@ void do_go_command(Model& model);
 void do_run_command(Model& model);
 void do_quit_command(Model& model);
 void do_output_command(Model &model);
+void do_attack_command(Model &model);
+void do_new_command(Model &model);
 
 
 #endif
